@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma 2.0 - The Next Generation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Enigma 2.0</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Enigma 2.0</h1>
+                <p class="tagline">The Next Generation of Secure Communication</p>
+                <p class="description">Experience the fusion of historic cryptography and modern encryption technology</p>
+                <button class="cta-button" onclick="scrollToDemo()">Try It Now</button>
+            </div>
+            <div class="hero-visual">
+                <div class="enigma-rotor"></div>
+                <div class="enigma-rotor"></div>
+                <div class="enigma-rotor"></div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Military-Grade Encryption</h3>
+                    <p>Advanced encryption algorithms inspired by the historic Enigma machine</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized performance for real-time encryption and decryption</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Cross-Platform</h3>
+                    <p>Works seamlessly across all devices and platforms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Zero-Knowledge</h3>
+                    <p>Your data is encrypted locally - we never see your messages</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="demo">
+            <h2>Interactive Demo</h2>
+            <div class="demo-container">
+                <div class="input-section">
+                    <label for="message-input">Enter your message:</label>
+                    <textarea id="message-input" placeholder="Type your secret message here..."></textarea>
+                    <div class="controls">
+                        <button id="encrypt-btn" onclick="encryptMessage()">Encrypt</button>
+                        <button id="decrypt-btn" onclick="decryptMessage()">Decrypt</button>
+                        <button id="clear-btn" onclick="clearMessages()">Clear</button>
+                    </div>
+                </div>
+                <div class="output-section">
+                    <label for="message-output">Output:</label>
+                    <textarea id="message-output" readonly placeholder="Encrypted/decrypted message will appear here..."></textarea>
+                    <div class="rotor-display">
+                        <div class="rotor" id="rotor1">
+                            <span class="rotor-label">Rotor I</span>
+                            <span class="rotor-position" id="rotor1-pos">A</span>
+                        </div>
+                        <div class="rotor" id="rotor2">
+                            <span class="rotor-label">Rotor II</span>
+                            <span class="rotor-position" id="rotor2-pos">A</span>
+                        </div>
+                        <div class="rotor" id="rotor3">
+                            <span class="rotor-label">Rotor III</span>
+                            <span class="rotor-position" id="rotor3-pos">A</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>About Enigma 2.0</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Enigma 2.0 is a modern tribute to the legendary Enigma machine used during World War II. While the original Enigma was eventually broken, this modern version incorporates contemporary cryptographic principles and technologies.</p>
+                    <p>Our mission is to educate people about the importance of encryption in protecting privacy and securing communications in the digital age.</p>
+                    <p>This project combines historical significance with modern web technologies to create an interactive learning experience.</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1918</div>
+                        <div class="timeline-desc">Original Enigma machine invented</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1939-1945</div>
+                        <div class="timeline-desc">Used extensively in WWII</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1941</div>
+                        <div class="timeline-desc">First successful decryption</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-desc">Enigma 2.0 reimagined</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Enigma 2.0. Educational project - Not for actual secure communications.</p>
+            <p>Built with passion for cryptography and history.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
