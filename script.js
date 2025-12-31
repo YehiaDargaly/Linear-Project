@@ -1,214 +1,115 @@
-// Simple Enigma-inspired encryption (educational purposes only)
-class EnigmaSimulator {
-    constructor() {
-        this.rotorPositions = [0, 0, 0];
-        this.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        
-        // Simplified rotor wirings (not historically accurate)
-        this.rotors = [
-            'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
-            'AJDKSIRUXBLHWTMCQGZNPYFVOE',
-            'BDFHJLCPRTXVZNYEIWGAKMUSQO'
-        ];
-        
-        this.reflector = 'YRUHQSLDPXNGOKMIEBFZCWVJAT';
-    }
-    
-    rotatRotors() {
-        this.rotorPositions[2]++;
-        
-        if (this.rotorPositions[2] >= 26) {
-            this.rotorPositions[2] = 0;
-            this.rotorPositions[1]++;
-        }
-        
-        if (this.rotorPositions[1] >= 26) {
-            this.rotorPositions[1] = 0;
-            this.rotorPositions[0]++;
-        }
-        
-        if (this.rotorPositions[0] >= 26) {
-            this.rotorPositions[0] = 0;
-        }
-        
-        this.updateRotorDisplay();
-    }
-    
-    updateRotorDisplay() {
-        document.getElementById('rotor1-pos').textContent = this.alphabet[this.rotorPositions[0]];
-        document.getElementById('rotor2-pos').textContent = this.alphabet[this.rotorPositions[1]];
-        document.getElementById('rotor3-pos').textContent = this.alphabet[this.rotorPositions[2]];
-    }
-    
-    encryptChar(char) {
-        if (!this.alphabet.includes(char)) {
-            return char;
-        }
-        
-        this.rotatRotors();
-        
-        let index = this.alphabet.indexOf(char);
-        
-        // Pass through rotors (forward)
-        for (let i = 2; i >= 0; i--) {
-            index = (index + this.rotorPositions[i]) % 26;
-            index = this.alphabet.indexOf(this.rotors[i][index]);
-        }
-        
-        // Reflector
-        index = this.alphabet.indexOf(this.reflector[index]);
-        
-        // Pass through rotors (backward)
-        for (let i = 0; i < 3; i++) {
-            index = this.rotors[i].indexOf(this.alphabet[index]);
-            index = (index - this.rotorPositions[i] + 26) % 26;
-        }
-        
-        return this.alphabet[index];
-    }
-    
-    processMessage(message) {
-        return message.toUpperCase()
-            .split('')
-            .map(char => this.encryptChar(char))
-            .join('');
-    }
-    
-    reset() {
-        this.rotorPositions = [0, 0, 0];
-        this.updateRotorDisplay();
-    }
-}
+// Enigma 2.0 - Cipher Implementation in JavaScript
+// Based on linear algebra matrix transformations
 
-// Global enigma instance
-let enigma = new EnigmaSimulator();
+// Character set: space + lowercase a-z + digits 0-9
+const O = [' ', ...Array.from('abcdefghijklmnopqrstuvwxyz'), ...'0123456789'.split('')];
 
-// Smooth scrolling
-function scrollToDemo() {
-    document.getElementById('demo').scrollIntoView({ 
-        behavior: 'smooth' 
+/**
+ * Encrypts a message using matrix transformations
+ * @param {number} key - The numeric encryption key
+ * @param {string} message - The message to encrypt
+ * @returns {Object} - { encrypted: string, hValues: number[] }
+ */
+function encryptMessage(key, message) {
+    // Convert to lowercase
+    message = message.toLowerCase();
+    const mList = message.split('');
+
+    const maty = [];
+
+    // Build matrix for each character
+    for (let j = 0; j < mList.length; j++) {
+        const char = mList[j];
+        if (O.includes(char)) {
+            const i = O.indexOf(char);
+            // Create vector [i, 2*i + j + key, 2*i + 2*j]
+            const A = [i, 2 * i + j + key, 2 * i + 2 * j];
+            maty.push(A);
+        }
+    }
+
+    if (maty.length === 0) {
+        return { encrypted: '', hValues: [] };
+    }
+
+    // Matrix multiplication with [1, 1, 1]
+    // Result: sum of each row = i + (2*i + j + key) + (2*i + 2*j) = 5*i + 3*j + key
+    const res = maty.map(row => row[0] + row[1] + row[2]);
+
+    // Calculate H values and processed values
+    const H = [];
+    const processedF = [];
+    const modBase = O.length;
+
+    for (const val of res) {
+        H.push(Math.floor(val / modBase));
+        processedF.push(val % modBase);
+    }
+
+    // Map back to characters
+    const encryptedChars = processedF.map(val => {
+        if (val >= 0 && val < O.length) {
+            return O[val];
+        }
+        return '';
     });
-}
 
-// Encrypt message
-function encryptMessage() {
-    const input = document.getElementById('message-input').value;
-    
-    if (!input.trim()) {
-        alert('Please enter a message to encrypt');
-        return;
-    }
-    
-    enigma.reset();
-    const encrypted = enigma.processMessage(input);
-    document.getElementById('message-output').value = encrypted;
-    
-    // Add animation
-    const outputField = document.getElementById('message-output');
-    outputField.style.animation = 'none';
-    setTimeout(() => {
-        outputField.style.animation = 'fadeInUp 0.5s ease';
-    }, 10);
-}
-
-// Decrypt message
-function decryptMessage() {
-    const input = document.getElementById('message-input').value;
-    
-    if (!input.trim()) {
-        alert('Please enter a message to decrypt');
-        return;
-    }
-    
-    // Enigma is symmetric - encryption and decryption are the same process
-    enigma.reset();
-    const decrypted = enigma.processMessage(input);
-    document.getElementById('message-output').value = decrypted;
-    
-    // Add animation
-    const outputField = document.getElementById('message-output');
-    outputField.style.animation = 'none';
-    setTimeout(() => {
-        outputField.style.animation = 'fadeInUp 0.5s ease';
-    }, 10);
-}
-
-// Clear messages
-function clearMessages() {
-    document.getElementById('message-input').value = '';
-    document.getElementById('message-output').value = '';
-    enigma.reset();
-}
-
-// Smooth scroll for navigation links
-document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-    
-    // Initialize rotor display
-    enigma.updateRotorDisplay();
-    
-    // Add scroll animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+    return {
+        encrypted: encryptedChars.join(''),
+        hValues: H
     };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all feature cards
-    document.querySelectorAll('.feature-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
+}
+
+/**
+ * Decrypts a message
+ * @param {number} key - The numeric decryption key
+ * @param {string} encryptedText - The encrypted message
+ * @param {Array|string} hValues - The H values (array or space-separated string)
+ * @returns {string} - Decrypted message
+ */
+function decryptMessage(key, encryptedText, hValues) {
+    const m = encryptedText.split('');
+
+    // Parse H values if string
+    let hList;
+    if (typeof hValues === 'string') {
+        hList = hValues.replace(/,/g, ' ').split(/\s+/).filter(x => x).map(x => parseInt(x));
+    } else {
+        hList = hValues.map(x => parseInt(x));
+    }
+
+    if (m.length !== hList.length) {
+        throw new Error('Length of encrypted text and H values must match');
+    }
+
+    // Reconstruct numeric values
+    const A = [];
+    for (let j = 0; j < m.length; j++) {
+        const char = m[j];
+        if (O.includes(char)) {
+            const i = O.indexOf(char);
+            const a = i + O.length * hList[j];
+            A.push(a);
+        }
+    }
+
+    // Reverse transformation
+    // Original: 5*i + 3*j + key = value
+    // Solve for i: i = (value - 3*j - key) / 5
+    const F = [];
+    for (let j = 0; j < A.length; j++) {
+        const val = (A[j] - 3 * j - key) / 5;
+        F.push(Math.round(val)); // Use round to handle any floating point errors
+    }
+
+    // Map back to characters
+    const decryptedChars = F.map(val => {
+        if (val >= 0 && val < O.length) {
+            return O[val];
+        }
+        return '';
     });
-});
 
-// Easter egg: Konami code
-let konamiCode = [];
-const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    return decryptedChars.join('');
+}
 
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.key);
-    konamiCode = konamiCode.slice(-10);
-    
-    if (konamiCode.join('') === konamiSequence.join('')) {
-        document.body.style.animation = 'rainbow 2s linear infinite';
-        setTimeout(() => {
-            document.body.style.animation = '';
-            alert('🎉 You found the secret! The Enigma code has been cracked!');
-        }, 2000);
-    }
-});
-
-// Rainbow animation for easter egg
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes rainbow {
-        0% { filter: hue-rotate(0deg); }
-        100% { filter: hue-rotate(360deg); }
-    }
-`;
-document.head.appendChild(style);
