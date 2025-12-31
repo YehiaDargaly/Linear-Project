@@ -1,122 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enigma 2.0 - The Next Generation</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Enigma 2.0 | Advanced Encryption</title>
+    <meta name="description"
+        content="Enigma 2.0 - A modern cipher tool based on linear algebra and matrix transformations for secure communications.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
 </head>
+
 <body>
-    <header>
-        <nav>
-            <div class="logo">Enigma 2.0</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#demo">Demo</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-        </nav>
+    <div class="background-effects">
+        <div class="glow-orb"></div>
+        <div class="grid-lines"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">ENIGMA <span class="accent">2.0</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">HISTORY</a></li>
+            <li><a href="#project">THE PROJECT</a></li>
+            <li><a href="#tool" class="cta-btn">LAUNCH TOOL</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="ENIGMA 2.0">ENIGMA 2.0</h1>
+            <p class="subtitle">Linear Algebra Cipher Protocol</p>
+            <p class="description">Secure your communications through advanced matrix transformations. A modern
+                implementation of cryptographic excellence.</p>
+            <a href="#tool" class="start-btn">INITIALIZE SYSTEM</a>
+        </div>
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Enigma 2.0</h1>
-                <p class="tagline">The Next Generation of Secure Communication</p>
-                <p class="description">Experience the fusion of historic cryptography and modern encryption technology</p>
-                <button class="cta-button" onclick="scrollToDemo()">Try It Now</button>
-            </div>
-            <div class="hero-visual">
-                <div class="enigma-rotor"></div>
-                <div class="enigma-rotor"></div>
-                <div class="enigma-rotor"></div>
-            </div>
-        </section>
-
-        <section id="features" class="features">
-            <h2>Key Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔐</div>
-                    <h3>Military-Grade Encryption</h3>
-                    <p>Advanced encryption algorithms inspired by the historic Enigma machine</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Optimized performance for real-time encryption and decryption</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Cross-Platform</h3>
-                    <p>Works seamlessly across all devices and platforms</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Zero-Knowledge</h3>
-                    <p>Your data is encrypted locally - we never see your messages</p>
+        <section id="about" class="section">
+            <div class="container">
+                <h2>History of Ciphers</h2>
+                <div class="card">
+                    <p>The history of ciphers and their evolution, with a focus on the World War II Enigma machine,
+                        provides the backdrop for understanding the importance of encryption in today's digital world.
+                        From ancient substitution ciphers to modern cryptography, the quest for secure communication has
+                        driven technological innovation.</p>
                 </div>
             </div>
         </section>
 
-        <section id="demo" class="demo">
-            <h2>Interactive Demo</h2>
-            <div class="demo-container">
-                <div class="input-section">
-                    <label for="message-input">Enter your message:</label>
-                    <textarea id="message-input" placeholder="Type your secret message here..."></textarea>
-                    <div class="controls">
-                        <button id="encrypt-btn" onclick="encryptMessage()">Encrypt</button>
-                        <button id="decrypt-btn" onclick="decryptMessage()">Decrypt</button>
-                        <button id="clear-btn" onclick="clearMessages()">Clear</button>
-                    </div>
-                </div>
-                <div class="output-section">
-                    <label for="message-output">Output:</label>
-                    <textarea id="message-output" readonly placeholder="Encrypted/decrypted message will appear here..."></textarea>
-                    <div class="rotor-display">
-                        <div class="rotor" id="rotor1">
-                            <span class="rotor-label">Rotor I</span>
-                            <span class="rotor-position" id="rotor1-pos">A</span>
-                        </div>
-                        <div class="rotor" id="rotor2">
-                            <span class="rotor-label">Rotor II</span>
-                            <span class="rotor-position" id="rotor2-pos">A</span>
-                        </div>
-                        <div class="rotor" id="rotor3">
-                            <span class="rotor-label">Rotor III</span>
-                            <span class="rotor-position" id="rotor3-pos">A</span>
-                        </div>
-                    </div>
+        <section id="project" class="section">
+            <div class="container">
+                <h2>About This Project</h2>
+                <div class="card">
+                    <p>This project explores the development of "Enigma 2.0," a ciphering tool based on linear algebra
+                        that employs matrix transformations to encode and decode messages. It simplifies complex
+                        mathematical operations into an accessible, user-friendly interface.</p>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about">
-            <h2>About Enigma 2.0</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Enigma 2.0 is a modern tribute to the legendary Enigma machine used during World War II. While the original Enigma was eventually broken, this modern version incorporates contemporary cryptographic principles and technologies.</p>
-                    <p>Our mission is to educate people about the importance of encryption in protecting privacy and securing communications in the digital age.</p>
-                    <p>This project combines historical significance with modern web technologies to create an interactive learning experience.</p>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year">1918</div>
-                        <div class="timeline-desc">Original Enigma machine invented</div>
+        <section id="tool" class="section tool-section">
+            <div class="container">
+                <div class="tool-container">
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="switchTab('encrypt')">ENCRYPTION PROTOCOL</button>
+                        <button class="tab-btn" onclick="switchTab('decrypt')">DECRYPTION PROTOCOL</button>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1939-1945</div>
-                        <div class="timeline-desc">Used extensively in WWII</div>
+
+                    <div id="encrypt-panel" class="panel active">
+                        <div class="input-group">
+                            <label for="enc-key">ENCRYPTION KEY (NUMERIC)</label>
+                            <input type="number" id="enc-key" placeholder="Enter a secret number (e.g., 5)"
+                                class="cyber-input">
+                        </div>
+                        <div class="input-group">
+                            <label for="enc-message">MESSAGE DATA</label>
+                            <textarea id="enc-message" placeholder="Enter message content here..."
+                                class="cyber-input"></textarea>
+                        </div>
+                        <button onclick="encrypt()" class="action-btn">ENCRYPT DATA</button>
+
+                        <div class="result-area hidden" id="enc-result">
+                            <div class="output-block">
+                                <h4>ENCRYPTED OUTPUT STREAM:</h4>
+                                <div class="code-box" id="enc-output-text"></div>
+                                <button class="copy-btn" onclick="copyToClipboard('enc-output-text')">COPY TO
+                                    CLIPBOARD</button>
+                            </div>
+                            <div class="output-block">
+                                <h4>H-VECTOR VALUES (REQUIRED FOR DECRYPTION):</h4>
+                                <div class="code-box" id="enc-output-h"></div>
+                                <button class="copy-btn" onclick="copyToClipboard('enc-output-h')">COPY TO
+                                    CLIPBOARD</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1941</div>
-                        <div class="timeline-desc">First successful decryption</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2025</div>
-                        <div class="timeline-desc">Enigma 2.0 reimagined</div>
+
+                    <div id="decrypt-panel" class="panel">
+                        <div class="input-group">
+                            <label for="dec-key">DECRYPTION KEY</label>
+                            <input type="number" id="dec-key" placeholder="Enter the source encryption key"
+                                class="cyber-input">
+                        </div>
+                        <div class="input-group">
+                            <label for="dec-text">ENCRYPTED DATA</label>
+                            <textarea id="dec-text" placeholder="Paste encrypted string..."
+                                class="cyber-input"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="dec-h">H-VECTOR VALUES</label>
+                            <input type="text" id="dec-h" placeholder="Paste H values (e.g., 0 0 1)"
+                                class="cyber-input">
+                        </div>
+                        <button onclick="decrypt()" class="action-btn">DECRYPT DATA</button>
+
+                        <div class="result-area hidden" id="dec-result">
+                            <div class="output-block">
+                                <h4>DECRYPTED MESSAGE CONTENT:</h4>
+                                <div class="code-box" id="dec-output-text"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,12 +132,91 @@
     </main>
 
     <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 Enigma 2.0. Educational project - Not for actual secure communications.</p>
-            <p>Built with passion for cryptography and history.</p>
-        </div>
+        <p>&copy; 2025 Enigma 2.0 Development Team. Secure Transmission.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="cipher.js"></script>
+    <script>
+        function switchTab(mode) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+
+            if (mode === 'encrypt') {
+                document.querySelector('.tab-btn:first-child').classList.add('active');
+                document.getElementById('encrypt-panel').classList.add('active');
+            } else {
+                document.querySelector('.tab-btn:last-child').classList.add('active');
+                document.getElementById('decrypt-panel').classList.add('active');
+            }
+        }
+
+        function encrypt() {
+            const key = parseInt(document.getElementById('enc-key').value);
+            const message = document.getElementById('enc-message').value;
+
+            if (!key && key !== 0 || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const btn = document.querySelector('#encrypt-panel .action-btn');
+            const originalText = btn.innerText;
+            btn.innerText = 'PROCESSING...';
+            btn.disabled = true;
+
+            try {
+                // Call local cipher function instead of API
+                const result = encryptMessage(key, message);
+
+                document.getElementById('enc-result').classList.remove('hidden');
+                document.getElementById('enc-output-text').innerText = result.encrypted;
+                document.getElementById('enc-output-h').innerText = result.hValues.join(' ');
+            } catch (e) {
+                alert('Encryption failed: ' + e.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function decrypt() {
+            const key = parseInt(document.getElementById('dec-key').value);
+            const encrypted_text = document.getElementById('dec-text').value;
+            const h_values = document.getElementById('dec-h').value;
+
+            if (!key && key !== 0 || !encrypted_text || !h_values) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const btn = document.querySelector('#decrypt-panel .action-btn');
+            const originalText = btn.innerText;
+            btn.innerText = 'PROCESSING...';
+            btn.disabled = true;
+
+            try {
+                // Call local cipher function instead of API
+                const decrypted = decryptMessage(key, encrypted_text, h_values);
+
+                document.getElementById('dec-result').classList.remove('hidden');
+                document.getElementById('dec-output-text').innerText = decrypted;
+            } catch (e) {
+                alert('Decryption failed: ' + e.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text);
+            const btn = document.querySelector(`button[onclick="copyToClipboard('${elementId}')"]`);
+            const originalText = btn.innerText;
+            btn.innerText = 'COPIED!';
+            setTimeout(() => btn.innerText = originalText, 2000);
+        }
+    </script>
 </body>
+
 </html>
